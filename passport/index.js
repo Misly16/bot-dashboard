@@ -1,3 +1,5 @@
+// I got this module from https://github.com/nicholastay/passport-discord
+
 /**
  * Module dependencies.
  */
