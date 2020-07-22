@@ -1,12 +1,11 @@
 const Discord = require("discord.js");
 const client = new Discord.Client();
 const ejs = require("ejs");
-const mongoose = require("mongoose");
 require("dotenv").config();
 var express = require("express"),
   session = require("express-session"),
   passport = require("passport"),
-  Strategy = require("passport-discord").Strategy,
+  Strategy = require("./passport/index.js").Strategy,
   app = express();
 
 client.once("ready", () => {
