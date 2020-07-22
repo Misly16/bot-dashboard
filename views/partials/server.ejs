@@ -17,6 +17,15 @@
 
 <body style="width: 100%;height: 100vh;background-color: #2e3440;">
 
+
+  <section class="d-xl-flex flex-column justify-content-xl-center align-items-xl-center"><img class="rounded-circle"
+    src="https://<%= username.id && username.avatar ? `cdn.discordapp.com/icons/${username.id}/${username.avatar}.png` : `discordapp.com/assets/dd4dbc0016779df1378e7812eabaa04d.png` %>"
+    width="213px" height="213px" style="margin-top: 53px;box-shadow: 0px 0px 20px;">
+<h1
+    style="font-family: Roboto, sans-serif;color: rgb(255,255,255);font-size: 36px;padding-top: 9px;margin-top: 77px;">
+    <%= username.username %></h1>
+
+
   <section class="text-center border rounded border-secondary child parent"
     style="background-color: #4c566a;width: 272px;height: 170px; padding: 10px; margin: 59px;margin-top: 49px;margin-right: 16px;border: 0px none #4c566a ;">
     <img class="rounded-circle"
