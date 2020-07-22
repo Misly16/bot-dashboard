@@ -101,6 +101,7 @@ app.get("/dashboard/server/:id", checkAuth, async function (req, res, next) {
   let username = req.user
   let serverinfo = req.user.guilds.filter((e) => e.id == req.params.id && e.permissions & 0x8)
   if (!serverinfo.length) {
+    //This will happen if that server doesnt exist either
     res.render(__dirname + "/views/errors/401.ejs", {username});
 
   } else {
