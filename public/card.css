@@ -1,0 +1,18 @@
+.parent-wrapper {
+    height: 100%;
+    width: 100%;
+    border: 1px solid black;
+  }
+  .parent {
+    display: flex;
+    font-size: 0;
+    flex-wrap: wrap;
+    margin: -10px 0 0 -10px;
+  }
+  .child {
+    display: inline-block;
+    background: blue;
+    margin: 10px 0 0 10px;
+    flex-grow: 1;
+    height: 100px;
+  }

@@ -1,0 +1,78 @@
+<% if (username) { %>
+
+
+<head>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto">
+
+</head>
+<nav class="navbar navbar-light navbar-expand-md" style="background-color: #4c566a;height: 65px;">
+    <div class="container-fluid"><a class="navbar-brand" href="/"
+            style="background-color: rgba(255,255,255,0);color: rgba(255,255,255,0.9);font-family: Roboto, sans-serif;">Home</a><button
+            data-toggle="collapse" class="navbar-toggler" data-target="#navcol-1"><span class="sr-only">Toggle
+                navigation</span><span class="navbar-toggler-icon"></span></button>
+        <div class="collapse navbar-collapse d-xl-flex justify-content-xl-end" id="navcol-1">
+            <ul class="nav navbar-nav">
+                <li class="nav-item" role="presentation"><a class="nav-link" href="/dashboard/"
+                        style="color: #ffffff;font-family: Roboto, sans-serif;">Dashboard</a></li>
+                        <li class="nav-item" role="presentation"><a class="nav-link" href="/logout/"
+                            style="color: #ffffff;font-family: Roboto, sans-serif;">Logout</a></li>
+
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+
+<style>
+
+.navbar .dropdown-menu {
+  background-color: #4c566a;
+}
+
+.navbar .dropdown.show a { 
+  background-color: #4c566a;
+}
+
+</style>
+
+
+
+
+
+
+
+
+
+
+
+
+<% } else { %>
+
+<head>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto">
+
+</head>
+<nav class="navbar navbar-light navbar-expand-md" style="background-color: #4c566a;height: 65px;">
+    <div class="container-fluid"><a class="navbar-brand" href="/"
+            style="background-color: rgba(255,255,255,0);color: rgba(255,255,255,0.9);font-family: Roboto, sans-serif;">Home</a><button
+            data-toggle="collapse" class="navbar-toggler" data-target="#navcol-1"><span class="sr-only">Toggle
+                navigation</span><span class="navbar-toggler-icon"></span></button>
+        <div class="collapse navbar-collapse d-xl-flex justify-content-xl-end" id="navcol-1">
+            <ul class="nav navbar-nav">
+                <li class="nav-item" role="presentation"><a class="nav-link" href="/dashboard/"
+                        style="color: rgb(255,255,255);font-family: Roboto, sans-serif;">Dashboard</a></li>
+                <li class="nav-item" role="presentation"><a class="nav-link" href="/login/"
+                        style="color: rgb(255,255,255);font-family: Roboto, sans-serif;">Sign In</a></li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+
+
+<% } %>
