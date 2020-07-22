@@ -18,7 +18,7 @@ passport.serializeUser(function (user, done) {
 passport.deserializeUser(function (obj, done) {
   done(null, obj);
 });
-
+//You can add email if you want to collect that.
 var scopes = ["identify", "guilds"];
 var prompt = "consent";
 
