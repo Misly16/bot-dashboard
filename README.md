@@ -38,3 +38,4 @@ Contributions, issues and feature requests are welcome!<br />Feel free to check 
 Give a ⭐️ if this project helped you!
 
 # Please note that this is just an example and I will not be helping with installation
+### Make sure to credit me if you are going to be using this!
