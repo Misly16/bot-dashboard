@@ -8,6 +8,8 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.0/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto">
     <link rel="stylesheet" href="card.css">
+    <link rel="stylesheet" href="text.css">
+
 
 </head>
 
@@ -19,7 +21,7 @@
             src="https://<%= serverinfo[0].id && serverinfo[0].icon ? `cdn.discordapp.com/icons/${serverinfo[0].id}/${serverinfo[0].icon}.png` : `discordapp.com/assets/dd4dbc0016779df1378e7812eabaa04d.png` %>"
             width="213px" height="213px" style="margin-top: 53px;box-shadow: 0px 0px 20px;">
         <h1
-            style="font-family: Roboto, sans-serif;color: rgb(255,255,255);font-size: 36px;padding-top: 9px;margin-top: 77px;">
+            style="font-family: Roboto, sans-serif;color: rgb(255,255,255);font-size: 36px;padding-top: 9px;margin-top: 77px;" class="tracking-in-expand">
             <%= serverinfo[0].name %></h1>
 
     </section>
