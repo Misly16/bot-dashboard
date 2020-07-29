@@ -18,9 +18,8 @@ npm install
 
 ## Usage
 
-```sh
-npm start  
-```
+You will need to make a .env file with some settings that are listed in the ```index.js``` file.
+You will also need to configure your own database as its not complete, nor is the settings page.
 
 ## Author
 
