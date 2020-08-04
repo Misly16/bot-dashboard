@@ -1,26 +1,28 @@
-const Discord = require("discord.js");
-const client = new Discord.Client();
-const ejs = require("ejs");
-require("dotenv").config();
-var express = require("express"),
-  session = require("express-session"),
-  passport = require("passport"),
-  Strategy = require("./passport/index.js").Strategy,
-  app = express();
+const Discord = require('discord.js');
 
-client.once("ready", () => {
-  console.log("Discord bot ready!");
+const client = new Discord.Client();
+const ejs = require('ejs');
+require('dotenv').config();
+const express = require('express');
+const session = require('express-session');
+const passport = require('passport');
+const { Strategy } = require('./passport/index.js');
+
+const app = express();
+
+client.once('ready', () => {
+  console.log('Discord bot ready!');
 });
-app.use(express.static("public"));
-passport.serializeUser(function (user, done) {
+app.use(express.static('public'));
+passport.serializeUser((user, done) => {
   done(null, user);
 });
-passport.deserializeUser(function (obj, done) {
+passport.deserializeUser((obj, done) => {
   done(null, obj);
 });
 // You can add email if you want to collect that.
-var scopes = ["identify", "guilds"];
-var prompt = "consent";
+const scopes = ['identify', 'guilds'];
+const prompt = 'consent';
 
 passport.use(
   new Strategy(
@@ -29,14 +31,12 @@ passport.use(
       clientSecret: process.env.CLIENTSECRET,
       callbackURL: process.env.CALLBACK,
       scope: scopes,
-      prompt: prompt,
+      prompt,
     },
-    function (accessToken, refreshToken, profile, done) {
-      process.nextTick(function () {
-        return done(null, profile);
-      });
-    }
-  )
+    ((accessToken, refreshToken, profile, done) => {
+      process.nextTick(() => done(null, profile));
+    }),
+  ),
 );
 
 app.use(
@@ -44,96 +44,96 @@ app.use(
     secret: process.env.SESSIONSECRET,
     resave: false,
     saveUninitialized: false,
-  })
+  }),
 );
 app.use(passport.initialize());
 app.use(passport.session());
 app.get(
-  "/login",
-  passport.authenticate("discord", { scope: scopes, prompt: prompt }),
-  function (req, res) {}
+  '/login',
+  passport.authenticate('discord', { scope: scopes, prompt }),
+  (req, res) => {},
 );
 app.get(
-  "/callback",
-  passport.authenticate("discord", { failureRedirect: "/login" }),
-  function (req, res) {
-    res.redirect("/dashboard");
-  } // auth success
+  '/callback',
+  passport.authenticate('discord', { failureRedirect: '/login' }),
+  (req, res) => {
+    res.redirect('/dashboard');
+  }, // auth success
 );
-app.get("/logout", function (req, res) {
+app.get('/logout', (req, res) => {
   req.logout();
-  res.redirect("/actioncomplete/logout");
+  res.redirect('/actioncomplete/logout');
 });
 // You can get rid of /user if you dont want your users to be able to see what
 // data has been collected from their profile
-app.get("/user", checkAuth, function (req, res) {
+app.get('/user', checkAuth, (req, res) => {
   res.json(req.user);
 });
 
-app.get("/actioncomplete/logout", function (req, res) {
-  let username = req.body;
-  res.render(__dirname + "/views/signedout.ejs", { username });
+app.get('/actioncomplete/logout', (req, res) => {
+  const username = req.body;
+  res.render(`${__dirname}/views/signedout.ejs`, { username });
 });
 
 // MAIN DASHBOARD
-app.get("/", async function (req, res) {
-  res.redirect("/login");
+app.get('/', async (req, res) => {
+  res.redirect('/login');
 });
-app.get("/dashboard", checkAuth, async function (req, res) {
-  let username = req.user;
+app.get('/dashboard', checkAuth, async (req, res) => {
+  const username = req.user;
   const fullserverlist = req.user.guilds.filter((e) => e.permissions & 0x8);
   if (!fullserverlist.length) {
-    res.render(__dirname + "/views/errors/noservers.ejs");
+    res.render(`${__dirname}/views/errors/noservers.ejs`);
   } else {
-    res.render(__dirname + "/views/index.ejs", { fullserverlist, username });
+    res.render(`${__dirname}/views/index.ejs`, { fullserverlist, username });
   }
 });
-app.get("/dashboard/server/:id", checkAuth, async function (req, res, next) {
-  let serverid = req.params.id;
-  let username = req.user;
-  let serverinfo = req.user.guilds.filter(
-    (e) => e.id == req.params.id && e.permissions & 0x8
+app.get('/dashboard/server/:id', checkAuth, async (req, res, next) => {
+  const serverid = req.params.id;
+  const username = req.user;
+  const serverinfo = req.user.guilds.filter(
+    (e) => e.id === req.params.id && e.permissions & 0x8,
   );
   if (!serverinfo.length) {
     // This will happen if that server doesnt exist either
-    res.render(__dirname + "/views/errors/401.ejs", { username });
+    res.render(`${__dirname}/views/errors/401.ejs`, { username });
   } else {
-    res.render(__dirname + "/views/serverdash.ejs", { serverinfo, username });
+    res.render(`${__dirname}/views/serverdash.ejs`, { serverinfo, username });
   }
 });
 
 // CONFIG PAGES
-app.get("/dashboard/server/:id/config/welcome", checkAuth, async function (
+app.get('/dashboard/server/:id/config/welcome', checkAuth, async (
   req,
   res,
-  next
-) {
-  let serverid = req.params.id;
-  let username = req.user;
-  let serverinfo = req.user.guilds.filter(
-    (e) => e.id == req.params.id && e.permissions & 0x8
+  next,
+) => {
+  const serverid = req.params.id;
+  const username = req.user;
+  const serverinfo = req.user.guilds.filter(
+    (e) => e.id == req.params.id && e.permissions & 0x8,
   );
   if (!serverinfo.length) {
-    res.render(__dirname + "/views/errors/401.ejs", { username });
+    res.render(`${__dirname}/views/errors/401.ejs`, { username });
   } else {
-    res.render(__dirname + "/views/welcome.ejs", { serverinfo, username });
+    res.render(`${__dirname}/views/welcome.ejs`, { serverinfo, username });
   }
 });
 
 // ERRORS
-app.use(function (req, res) {
+app.use((req, res) => {
   res.status(404);
-  let username = req.user;
+  const username = req.user;
 
-  res.render(__dirname + "/views/errors/404.ejs", { username });
+  res.render(`${__dirname}/views/errors/404.ejs`, { username });
 });
 function checkAuth(req, res, next) {
   if (req.isAuthenticated()) return next();
-  res.redirect("/login");
+  res.redirect('/login');
 }
 
 client.login(process.env.TOKEN);
-app.listen(8000, function (err) {
+app.listen(8000, (err) => {
   if (err) return console.log(err);
-  console.log("Serving at http://localhost:8000/");
+  console.log('Serving at http://localhost:8000/');
 });
