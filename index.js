@@ -1,3 +1,5 @@
+/* eslint-disable linebreak-style */
+/* eslint-disable consistent-return */
 const Discord = require('discord.js');
 
 const client = new Discord.Client();
@@ -111,7 +113,7 @@ app.get('/dashboard/server/:id/config/welcome', checkAuth, async (
   const serverid = req.params.id;
   const username = req.user;
   const serverinfo = req.user.guilds.filter(
-    (e) => e.id == req.params.id && e.permissions & 0x8,
+    (e) => e.id === req.params.id && e.permissions & 0x8,
   );
   if (!serverinfo.length) {
     res.render(`${__dirname}/views/errors/401.ejs`, { username });
